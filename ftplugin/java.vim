@@ -23,4 +23,7 @@ ruby << SCRIPT
     buff.delete(buff.length)
 
 SCRIPT
+
+normal VggG=
+
 endfunction
