@@ -8,7 +8,7 @@ describe PoJo::JoJo, "#pojoize" do
 
     context "no fields" do
         it "should equal boiler plate" do
-            expected = "public class ClassName {\n}"
+            expected = ['public class ClassName {','}']
             expect(@pojoj.pojoize([])).to eq(expected)
         end
     end
@@ -30,7 +30,7 @@ describe PoJo::JoJo, "#pojoize" do
         end
 
         it "should create a .toString() method" do
-            to_string_signature = "public String toString"
+            to_string_signature = "public String toString() {"
             to_string_setup = "StringBuilder builder = new StringBuilder(\"ClassName {\");"
             to_string_contents = "builder.append(\"theProperty='\" + this.theProperty + \"'\");"
 
