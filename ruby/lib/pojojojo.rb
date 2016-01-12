@@ -7,6 +7,8 @@ module PoJo
 
         def pojoize(fields)
             lines = []
+            lines << "public class #{@className} {"
+            lines << "}"
             lines
         end
     end
