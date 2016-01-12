@@ -12,6 +12,8 @@ module PoJo
             lines << "" unless fields.empty?
             write_getters_and_setters lines, fields
             lines << "" unless fields.empty?
+            write_to_string lines, fields unless fields.empty?
+            lines << "" unless fields.empty?
             lines << "}"
             lines
         end
@@ -29,5 +31,15 @@ module PoJo
             end
         end
 
+        def write_to_string(lines, fields)
+            lines << "public String toString() {"
+            lines << "StringBuilder builder = new StringBuilder(\"#{@className} {\");"
+            fields.each do |t, n|
+                lines << "builder.append(\"#{n}='\" + this.#{n} + \"'\");"
+            end
+            lines << "builder.append(\"}\");"
+            lines << "return builder.toString();"
+            lines << "}"
+        end
     end
 end
