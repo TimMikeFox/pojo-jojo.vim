@@ -1,1 +1,3 @@
 ruby/*.gem
+ruby/.rspec
+ruby/.exrc
