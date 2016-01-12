@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'pojojojo'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: pojojojo [options]"
+
+  opts.on("-f", "--file=FILE", "Input .java file. Used to derive class name") do |f|
+    options[:file] = f
+  end
+end.parse!
+
+abort("No input file provided. run 'pojojojo -h' for help.") if options[:file].nil?
+
+input = []
+File.new(options[:file], 'r').each_line do |l|
+    input << l.split
+end
+
+puts PoJo::JoJo.new(File.basename(options[:file], ".java")).pojoize(input)
