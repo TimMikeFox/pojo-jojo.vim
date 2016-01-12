@@ -36,8 +36,10 @@ module PoJo
         def write_to_string(lines, fields)
             lines << "public String toString() {"
             lines << "StringBuilder builder = new StringBuilder(\"#{@className} {\");"
+            comma = ""
             fields.each do |t, n|
-                lines << "builder.append(\"#{n}='\" + this.#{n} + \"'\");"
+                lines << "builder.append(\"#{comma}#{n}='\" + this.#{n} + \"'\");"
+                comma = ","
             end
             lines << "builder.append(\"}\");"
             lines << "return builder.toString();"
