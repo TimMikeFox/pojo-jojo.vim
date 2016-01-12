@@ -40,6 +40,20 @@ describe PoJo::JoJo, "#pojoize" do
             expect(result).to include(to_string_setup)
             expect(result).to include(to_string_contents)
         end
+
+        it "should create a .equals() method" do
+            equals_signature = "public boolean equals(Object o) {"
+            identity_check = "if(this == o) return true;"
+            instance_check = "if(!(o instanceof ClassName)) return false;"
+            field_check = "if(!Objects.equals(this.theProperty, other.theProperty)) return false;"
+
+            result = @pojoj.pojoize(input)
+
+            expect(result).to include(equals_signature)
+            expect(result).to include(identity_check)
+            expect(result).to include(instance_check)
+            expect(result).to include(field_check)
+        end
     end
 
 end

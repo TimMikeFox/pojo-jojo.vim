@@ -14,6 +14,8 @@ module PoJo
             lines << "" unless fields.empty?
             write_to_string lines, fields unless fields.empty?
             lines << "" unless fields.empty?
+            write_equals lines, fields unless fields.empty?
+            lines << "" unless fields.empty?
             lines << "}"
             lines
         end
@@ -39,6 +41,19 @@ module PoJo
             end
             lines << "builder.append(\"}\");"
             lines << "return builder.toString();"
+            lines << "}"
+        end
+
+        def write_equals(lines, fields)
+            lines << "public boolean equals(Object o) {"
+            lines << "if(this == o) return true;"
+            lines << "if(!(o instanceof #{@className})) return false;"
+            lines << "#{@className} other = (#{@className}) o;"
+            lines << ""
+            fields.each do |t, n|
+                lines << "if(!Objects.equals(this.#{n}, other.#{n})) return false;"
+            end
+            lines << ""
             lines << "}"
         end
     end
